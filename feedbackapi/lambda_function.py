@@ -4,8 +4,8 @@ import rds_config
 import pymysql
 #rds settings
 
-"""
-rds_host  = "aurorademodb.cluster-czcivhqqc3vl.us-east-1.rds.amazonaws.com"
+
+rds_host  = "mysql"
 name = rds_config.db_username
 password = rds_config.db_password
 db_name = rds_config.db_name
@@ -22,6 +22,8 @@ except pymysql.MySQLError as e:
     sys.exit()
 
 logger.info("SUCCESS: Connection to RDS MySQL instance succeeded")
+
+"""
 def lambda_handler(event, context):
     user=event['user']
     email=event['email']
