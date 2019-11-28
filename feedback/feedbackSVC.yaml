@@ -1,0 +1,15 @@
+---			  
+apiVersion: v1
+kind: Service
+metadata:
+  name: feedback
+  labels:
+    role: feedback
+spec:
+  selector:
+    role: feedback
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 32222
+  type: NodePort
