@@ -20,7 +20,7 @@ def api():
     feedback=request.form['feedback']
     phone=request.form['phone']
     d={"user": user,"email":email,"feedback":feedback,"phone":phone}
-    url="http://localhost:5000/test"
+    url="http://feedback:5000/test"
     r=requests.post(url,d)    
 
 
