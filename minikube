@@ -1,0 +1,81 @@
+apt-get update
+apt-get install -y git wget
+
+# Install Docker
+apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+apt-key fingerprint 0EBFCD88
+add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+   
+apt-get update
+
+apt-get install -yq docker-ce
+
+
+# Install Kubectl
+
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+sudo touch /etc/apt/sources.list.d/kubernetes.list 
+echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+sudo apt-get update
+sudo apt-get install -y kubectl
+
+
+curl -L https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 -o /home/ubuntu/minikube \
+  && chmod +x /home/ubuntu/minikube
+
+cd /home/ubuntu/
+
+sudo ./minikube start --vm-driver=none
+
+sudo cat <<EOF > /home/ubuntu/config_permission.sh
+sudo mv /root/.kube /root/.minikube $HOME
+sudo chown -R $USER $HOME/.kube $HOME/.minikube
+EOF
+
+chmod +x /home/ubuntu/config_permission.sh
+
+
+
+  
+  
+  
+  
+  
+========================================================================================================================
+
+https://github.com/GoogleCloudPlatform/kubernetes-engine-samples/tree/master/wordpress-persistent-disks
+
+https://kubernetes.io/docs/tasks/run-application/run-single-instance-stateful-application/
+
+
+kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h mysql -ppassword
+
+
+
+CREATE DATABASE AuroraDemoDB;
+
+USE AuroraDemoDB;
+
+Create table `AuroraDemoDB`
+( user varchar(50),
+email varchar(60),
+feedback varchar(150),
+phone  varchar(15)
+);
+
+Insert into `AuroraDemoDB` values ('User1','Team1','feedback1',2);
+
+select * from AuroraDemoDB;
+
+
+git clone  https://github.com/schoolofdevops/kube-ops-view
+kubectl apply -f kube-ops-view/deploy/
